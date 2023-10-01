@@ -22,3 +22,10 @@
 /docker_data
 /docker-compose.override.yml
 /supervisord.pid
+
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
