@@ -1,0 +1,8 @@
+{% for type in ['success', 'info', 'warning', 'danger'] %}
+    {% for message in app.session.flashbag.get(type) %}
+        <div class="alert alert-{{ type }} alert-dismissible fade show" role="alert">
+            {{ message|trans({}, 'alerts') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    {% endfor %}
+{% endfor %}
