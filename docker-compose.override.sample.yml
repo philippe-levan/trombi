@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  web:
+    volumes:
+      - .:/var/www
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      XDEBUG_CONFIG: "PHPSTORM"
+      PHP_IDE_CONFIG: "serverName=localhost"
+
+  node:
+    volumes:
+      - .:/var/www
+
+  database:
+    ports:
+      - "5432:5432"
+
+  mailer:
+    image: schickling/mailcatcher
+    ports: [ "1025", "1080" ]
+
+  mkdocs:
+    image: kibatic/mkdocs
+    labels:
+      - "traefik.http.services.gendoc-mkdocs.loadbalancer.server.port=8000"
+    environment:
+      LIVE_RELOAD_SUPPORT: 'true'
+      ADD_MODULES: 'fontawesome-markdown mkdocs-git-revision-date-localized-plugin mkdocs-material mermaid2'
+      DOCS_DIRECTORY: '/mkdocs'
+    volumes:
+      - ./mkdocs.yml:/mkdocs/mkdocs.yml
+      - ./docs:/mkdocs/docs

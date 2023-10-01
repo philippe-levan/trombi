@@ -3,11 +3,11 @@
 /.env.local
 /.env.local.php
 /.env.*.local
-/config/secrets/prod/prod.decrypt.private.php
-/public/bundles/
 /var/
-/vendor/
 ###< symfony/framework-bundle ###
+
+/ddata
+/docker-compose.override.yml
 
 ###> phpunit/phpunit ###
 /phpunit.xml
@@ -18,7 +18,3 @@
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
-
-/docker_data
-/docker-compose.override.yml
-/supervisord.pid
