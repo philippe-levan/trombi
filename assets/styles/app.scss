@@ -1,7 +1,9 @@
-body {
-    background-color: yellow;
-
-}
-$red: #FB4040;
+$yellow: #fdd835;
+$body-bg: #DDD;
+$body-color: #666;
 
 @import '../../vendor/twbs/bootstrap/scss/bootstrap';
+
+body {
+    background-color: $yellow;
+}
