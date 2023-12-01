@@ -1,4 +1,7 @@
 body {
-    background-color: lightgray;
+    background-color: yellow;
+
 }
-@import '~bootstrap/scss/bootstrap';
+$red: #FB4040;
+
+@import '../../vendor/twbs/bootstrap/scss/bootstrap';

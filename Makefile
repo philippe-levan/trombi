@@ -38,12 +38,10 @@ _deps:
 	yarn install --dev --force # le "force" est pour SF UX
 
 assets-dev: ## [host] Compile les assets en dev
-	docker-compose run --rm -v $$(pwd):/var/www node yarn install
-	docker-compose run --rm -v $$(pwd):/var/www node yarn encore dev --watch
+	docker-compose exec web ./bin/console sass:build --watch
 
 assets-prod: ## [host] Compile les assets en prod
-	docker-compose run --rm -v $$(pwd):/var/www node yarn install
-	docker-compose run --rm -v $$(pwd):/var/www node yarn encore prod
+	docker-compose exec web ./bin/console sass:build
 
 tests: ## [host] Lance les tests
 	docker-compose run --rm -v $$(pwd):/var/www web make _tests
