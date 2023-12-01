@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Trombi{% endblock %}
+
+{% block content %}
+    <h1>Trombi</h1>
+    {% for user in users %}
+        <div class="card" style="width: 18rem;">
+{#            <img src="{{ asset('uploads/' ~ user.image) }}" class="card-img-top" alt="...">#}
+            <div class="card-body">
+                <h5 class="card-title">{{ user.email }} {{ user.firstname }} {{ user.lastname }}</h5>
+                <p class="card-text">{{ user.description }}</p>
+                <a href="{{ path('app_user_show', {'id': user.id}) }}" class="btn btn-primary">Voir</a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

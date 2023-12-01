@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un utilisateur{% endblock %}
+
+{% block content %}
+    <h1>Modifier un utilisateur</h1>
+    {{ form_start(form) }}
+    {{ form_rest(form) }}
+    <button class="btn btn-primary">Modifier</button>
+    {{ form_end(form) }}
+{% endblock %}
