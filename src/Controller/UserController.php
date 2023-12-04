@@ -73,16 +73,20 @@ class UserController extends AbstractController
             // save user
             $entityManager->persist($user);
             $entityManager->flush();
-
+            // flash message success
+            $this->addFlash('success', 'User updated');
             // redirect to user show page
             return $this->redirectToRoute('app_user_trombi', [
                 'id' => $user->getId(),
             ]);
+        } else {
+            // flash message error
+            $this->addFlash('error', 'User not updated');
         }
 
         return $this->render('user/edit.html.twig', [
             'user' => $user,
-            'form' => $form->createView()
+            'form' => $form
         ]);
     }
 }

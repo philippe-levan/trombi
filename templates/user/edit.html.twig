@@ -2,6 +2,10 @@
 
 {% block title %}Modifier un utilisateur{% endblock %}
 
+{% block metas %}
+    <meta name="turbo-cache-control" content="no-preview"/>
+{% endblock %}
+
 {% block content %}
     <h1>Modifier un utilisateur</h1>
     {{ form_start(form) }}
