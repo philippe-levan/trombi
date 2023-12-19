@@ -1,0 +1,13 @@
+<h5 class="card-title">{{ user.email }} {{ user.firstname }} {{ user.lastname }}</h5>
+<p class="card-text">{{ user.description }}</p>
+{% if is_granted('WRITE', user) %}
+    <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn btn-primary">Modifier</a>
+{% endif %}
+
+{% if is_granted('WRITE', user) %}
+    {% include 'user/_delete_button.html.twig' %}
+{% endif %}
+
+{% if is_granted('ACTIVATE', user) %}
+    {% include 'user/_activate_button.html.twig' %}
+{% endif %}

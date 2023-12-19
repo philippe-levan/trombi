@@ -1,0 +1,13 @@
+<form action="{{ path('app_user_toggle_activate', {'id': user.id}) }}" method="post">
+    <input type="hidden" name="_token" value="{{ csrf_token('activate' ~ user.id) }}">
+    {% if user.isValidatedByAdmin %}
+        <button
+            class="btn btn-light btn-sm"
+            onclick="return confirm('Are you sure you want to desactivate the user {{ user.firstName }} ?');"
+        >Desactivate</button>
+    {% else %}
+        <button
+                class="btn btn-light btn-sm"
+        >Activate</button>
+    {% endif %}
+</form>

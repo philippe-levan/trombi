@@ -26,6 +26,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $email = null;
 
+    #[ORM\Column(options: ['default' => false])]
+    private ?bool $isEmailPublic = false;
+
     #[ORM\Column]
     private array $roles = [];
 
@@ -47,13 +50,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $createdAt;
 
-    #[ORM\Column(options: ['default' => false])]
-    private ?bool $acceptedToBeVisible = null;
+    #[ORM\Column(nullable: true, options: ['default' => null])]
+    private ?\DateTime $validatedByAdminAt;
 
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
-        $this->acceptedToBeVisible = false;
+        $this->validatedByAdminAt = null;
+        $this->isEmailPublic = false;
+    }
+
+    public function getFullName(): string
+    {
+        return trim($this->firstName . ' ' . $this->lastName);
     }
 
     public function getId(): ?int
@@ -70,6 +79,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->email = $email;
 
+        return $this;
+    }
+
+    public function getIsEmailPublic(): bool
+    {
+        return $this->isEmailPublic;
+    }
+
+    public function setIsEmailPublic(bool $isEmailPublic): self
+    {
+        $this->isEmailPublic = $isEmailPublic;
         return $this;
     }
 
@@ -178,15 +198,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function hasAcceptedToBeVisible(): ?bool
+    public function getValidatedByAdminAt(): ?\DateTime
     {
-        return $this->acceptedToBeVisible;
+        return $this->validatedByAdminAt;
     }
 
-    public function setAcceptedToBeVisible(bool $acceptedToBeVisible): static
+    public function setValidatedByAdminAt(?\DateTime $validatedByAdminAt): self
     {
-        $this->acceptedToBeVisible = $acceptedToBeVisible;
-
+        $this->validatedByAdminAt = $validatedByAdminAt;
         return $this;
+    }
+
+    public function isValidatedByAdmin(): bool
+    {
+        return $this->validatedByAdminAt !== null;
     }
 }
